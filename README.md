@@ -24,11 +24,7 @@ This system enables:
    - Responsible team (Integrations, Core, Postmortem, Feature Request)
    - Mentioned payment provider (SafetyPay, etc.)
    - Specific metadata (status, priority, dates, etc.)
-3. **Hybrid search**:
-   - Semantic search with vector embeddings
-   - Metadata filtering (team, provider, type)
-   - Analytical queries (count tickets, group by provider)
-4. **Response generation** using Claude Sonnet 4.5
+3. **Response generation** using Claude Sonnet 4.5
 5. **Automatic evaluation** of Precision and Groundedness
 
 ### Use Cases
@@ -148,28 +144,6 @@ cd yuno-rag-pipeline
 ```bash
 pip install -r requirements.txt
 ```
-
-**Note about embeddings:**
-
-The system supports 3 embedding options:
-
-1. **Local (default)** - Free, no API key required
-   ```bash
-   pip install sentence-transformers
-   ```
-
-2. **OpenAI** - Recommended for production
-   ```bash
-   pip install openai
-   ```
-
-3. **Voyage AI** - Recommended by Anthropic
-   ```bash
-   pip install voyageai
-   ```
-
----
-
 ## ⚙️ Configuration
 
 ### Step 1: Configure environment variables
@@ -290,9 +264,6 @@ Collection Statistics:
 ```bash
 # Simple query
 python main.py query "What is SafetyPay?"
-
-# Analytical query
-python main.py query "How many integration tickets are there?"
 
 # Ticket-specific query
 python main.py query "Give me information about ticket AP-541"
@@ -493,77 +464,6 @@ yuno-rag-pipeline/
 2. **Flexible schema** - Metadata varies by document type
 3. **Scalable** - Can grow with your data
 4. **Managed service** - No need to maintain infrastructure
-
----
-
-## 🔧 Troubleshooting
-
-### Error: "No module named 'sentence_transformers'"
-
-```bash
-pip install sentence-transformers
-```
-
-### Error: "ANTHROPIC_API_KEY not found"
-
-Make sure to:
-1. Create `.env` file in the project root
-2. Add `ANTHROPIC_API_KEY=sk-ant-xxxxx`
-3. Don't share this file (it's in .gitignore)
-
-### Error: "Connection to MongoDB failed"
-
-Verify:
-1. MongoDB URI in `.env` is correct
-2. Your IP is in MongoDB Atlas whitelist
-3. Username/password are correct
-
-### Embeddings are slow
-
-If using local embeddings and it's too slow:
-1. Consider using OpenAI embeddings (faster)
-2. Or process documents in smaller batches
-
----
-
-## 📹 Explanatory Video
-
-(You will record a 3-5 minute video explaining:)
-
-1. **Architecture** (1 min)
-   - Pipeline diagram
-   - Why Metadata-Filtered RAG
-
-2. **Demo** (2 min)
-   - Ingest documents
-   - Run queries
-   - Show results
-
-3. **Evals** (1 min)
-   - Run evaluations
-   - Explain results
-
-4. **Tradeoffs** (1 min)
-   - Design advantages
-   - Known limitations
-
----
-
-## 🤝 Contributing
-
-To add more features:
-
-1. **New metadata types** - Edit `utils/metadata_extractor.py`
-2. **New query patterns** - Edit `generation/generator.py`
-3. **New evaluations** - Create file in `evals/`
-
----
-
-## 📝 License
-
-Internal Yuno project.
-
----
 
 ## 🙏 References
 
